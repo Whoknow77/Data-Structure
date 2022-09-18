@@ -984,11 +984,13 @@ public class DoublyLinkedList {
 }
 ```
 
-## Tree
+## 트리(Tree)
 
 -  정의
 
     데이터가 순차적으로 나열되어진 형태인 스택과 큐와 다르게 데이터가 계층적(망)으로 구성되어있는 비선형구조이다. 선형구조는 저장과 꺼내는 것에 초점이 맞춰져 있다면 비선형구조는 **표현**에 초점이 맞춰져 있다.
+
+    그래프의 일종
 
 - 개념
   
@@ -1303,10 +1305,167 @@ public class BinaryTree {
       }
     }
       }
+
+
+## 그래프(Graph)
+
+  **정점(Vertex)와 간선(Edge)으로 이루어진 자료구조**
+
+  
+  - 용어
+
+    - **정점(Vertex)** : 노드(node) 라고도 하며 정점에는 데이터가 저장된다.
+
+    - **간선(Edge)** : 정점(노드)를 연결하는 선으로 link, branch 라고도 부른다.
+
+    - 인접 정점(adjacent Vertex) : 간선에 의해 직접 연결된 정점 (0과 2은 인접정점)
+
+    -  단순 경로(simple path) : 경로 중에서 반복되는 정점이 없는 경우. 한붓그리기와 같이 같은 간선을 지나가지 않는 경로 ( 0->3->2->1 은 단순경로 )
+
+    - 차수(degree) : 무방향 그래프에서 하나의 정점에 인접한 정점의 수 (0의 차수는 3)
+
+    - 진출 차수(in-degree) : 방향 그래프에서 외부로 향하는 간선의 수
+
+    - 진입 차수(out-degree) : 방향 그래프에서 외부에서 들어오는 간선의 수
+
+    -  경로 길이(path length) : 경로를 구성하는데 사용된 간선의 수
+
+    -  사이클(cycle) : 단순 경로의 시작 정점과 종료 정점이 동일한 경우
 		
 
+  - 구현 방법
 
-   
+    - **인접행렬 방식**
+    <img src="https://blog.kakaocdn.net/dn/bU5TAj/btq6FvzI00f/JhlHNPKKEHdmFuBDcOpp1k/img.png">
+
+      그래프의 노드를 2차원 배열로 만든 것
+
+      노드들 간에 직접 연결이 되어있으면 1을, 아니면 0을 넣어서 행렬을 완성시킨 것
+
+      - 장점
+
+        2차원 배열 안에 모든 정점들의 간선 정보가 담겨있기 때문에 두 정점에 대한 연결 정보를 조회할 때 O(1)의 시간복잡도면 가능하다.
+
+        인접리스트에 비해 구현이 쉽다.
+
+
+      - 단점
+
+        모든 정점에 대해 간선 정보를 대입해야 하므로 O(n^2)의 시간복잡도가 소요된다.
+
+        무조건 2차원 배열이 필요하기 때문에 필요 이상의 공간이 낭비된다.
+    
+    - **인접 리스트 방식**
+
+      그래프의 노드를 리스트로 표현한 것
+
+      주로 정점의 리스트 배열을 만들어 관계를 설정하며 노드들 간에 직접 연결이 되어있으면 해당 노드의 인덱스에 그 노드를 삽입해주면 된다.
+
+      - 장점
+
+        정점들의 연결 정보를 탐색할 때 O(n) 시간이면 가능하다.
+
+        필요한 만큼의 공간만 사용하기 때문에 공간의 낭비가 적다.
+
+      - 단점
+
+          특정 두 점이 연결되었는지 확인하려면 인접행렬에 비해 시간이 오래걸린다.
+
+          (O(E) 시간 소요. E는 간선의 개수)
+          
+          **구현이 비교적 어렵다.**
+
+  - 종류
+
+    - 무방향 그래프
+
+      두 정점을 연결하는 간선에 방향이 없는 그래프
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FDAqKU%2FbtrfiwXVG8G%2FD1DyuXvwPQUZPcJUKakBKk%2Fimg.png">
+
+
+    - 방향 그래프
+
+      두 정점을 연결하는 간선에 방향이 존재하는 그래프
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb4SbKU%2FbtrfgYH5hXD%2F6p51kJ07OPgaeRS5IuEk3k%2Fimg.png">
+
+    
+
+    - 가중치 그래프
+
+      간선에 가중치(비용)가 할당된 그래프로, 두 정점을 이동할 때 비용이 드는 그래프
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSq2g9%2FbtrffQjgnNb%2FhMkyZqP4qR1KbKguklO41k%2Fimg.png">
+
+
+
+    - 연결 그래프
+
+      무방향 그래프에 있는 모든 정점 쌍에 대해서 항상 경로가 존재하는 그래프
+
+      즉 노드들이 하나도 빠짐없이 간선에 연결되어 있는 그래프로 **트리(Tree)** 가 대표적인 예이다.
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F34w7V%2FbtrfjcSovHh%2FNo0igelqdwis7Qah95eMK1%2Fimg.png">
+
+
+    - 비연결 그래프
+
+      무방향 그래프에서 특정 정점 사이에 경로가 존재하지 않는 그래프
+
+      즉, 노드들 중 간선에 의해 연결되어 있지 않은 그래프로
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F22Ijs%2FbtrfhIEtQ5S%2FDZmdkCBAtxK0PX72cIXsS0%2Fimg.png">
+
+    - **완전 그래프**
+
+      그래프의 모든 정점이 서로 연결되어 있는 그래프이다.(인접 연결)
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fk1G3R%2FbtrfhIqYuso%2FFCkMWn7mB82yDVpsi36UK0%2Fimg.png">
+
+    - **순환 그래프(Cycle)**
+
+      단순 경로에서 시작 정점과 도착 정점이 동일한 그래프이다.(A 시작 ->A 끝 가능)
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcDwFx5%2FbtrfjdqffI2%2FAKIxmvwkk9xKbEib4nrHu0%2Fimg.png">
+
+    - 비순환 그래프
+
+      사이클이 없는 그래프
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWEhuV%2Fbtrfi47VkAz%2Fk3bxfxKDsZWOMWJBct2aC1%2Fimg.png">
+
+    - 신장 트리(Spanning Tree)
+
+      원래 그래프의 모든 노드가 연결되어 있으면서, 트리의 속성을 만족하는 그래프
+
+      트리의 속성을 만족하기 때문에 **사이클이 존재하면 안된다.**
+
+      <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdVAGrT%2Fbtq6EU0Nq6f%2F5kUNSMkQCVxmpgvwOVupi0%2Fimg.png">
+
+    
+    - 최소 신장트리(Minimum Spanning Tree)
+
+      신장트리 중 간선의 가중치 합이 최소인 신장 트리
+
+      <img src="https://blog.kakaocdn.net/dn/s1RiO/btq6BfkAvAG/n6XsVdYaPzqWBfSUk2ujk1/img.png">
+
+    
+## 최소 신장 트리(MST)를 찾는 알고리즘
+
+**Greedy 알고리즘** 을 이용한다.
+
+  - **크루스칼 알고리즘**
+
+    1) 주어진 그래프의 모든 간선에 대해서, 간선의 연결비용을 낮은 순으로 오름 차순 정렬한다.
+
+    2) 정렬된 간선 순서대로 선택하면서, 간선의 양 끝 정점을 Union 한다. 단, 이때 선택된 두 정점이 같은 집합에 속해있다면 사이클(cycle)이 있다고 판단하고 포함시키지 않는다.
+
+    3) 
+
+  - **Prim 알고리즘**
+
+    1) 
 
 
 
@@ -1346,10 +1505,11 @@ public class BinaryTree {
 
 
 
-
-- 출처 
+-----------------------------------
+# 출처 
 
     https://yjshin.tistory.com/entry/
     https://baeharam.netlify.app/posts/data%20structure/hash-table
     https://opentutorials.org/module/1335/8941#
     https://go-coding.tistory.com/7
+    https://hongcoding.tistory.com/78
