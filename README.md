@@ -1210,105 +1210,101 @@ public class BinaryTree {
     import java.util.Scanner;
 
     public class MaxHeap {
+    
+    public static class MaximumHeap{
       
-      public static class MaximumHeap{
-        
-        private ArrayList<Integer> heap; // heap 이름의 int 데이터를 담는 ArrayList 배열 선언
-        // 배열과 달리 생성후에 크기가 변한다.
-        
-        public MaximumHeap() { // 최대 힙 클래스
-          heap = new ArrayList<>();
-          heap.add(1000000);
-        }
-        
-        public void print() { // heap 출력
-          for(int i=1; i<heap.size(); i++) {
-            System.out.print(heap.get(i)+" ");
-          }
-          System.out.println();
-        }
-        
-        public void insert(int val) { // 가장 마지막에 삽입
-          heap.add(val); // 마지막 위치에 노드 삽입
-          int p = heap.size() - 1; // 인덱스 값
-          
-          while(p>1 && heap.get(p/2) < heap.get(p)) { // 루트노드가 아니고, 자식 노드가 더 크다면
-            System.out.println("swap"); //swap
-            int temp = heap.get(p/2);
-            heap.set(p/2, heap.get(p));
-            heap.set(p, temp);
-            
-            
-            p=p/2; //부모 노드로 위치 이동
-          }
-        }
-        
-        public int delete() { // 항상 루트노드 삭제
-          if(heap.size() - 1 < 1) { // 힙 안의 노드가 하나 이거나 없을 때는 삭제 불가
-            return 0;
-          }
-          
-          int deletedItem = heap.get(1); // 삭제할 데이터 저장(루트노드)
-          
-          heap.set(1, heap.get(heap.size() -1 )); // set() : 임의의 원소 수정 => 루트노드의 값에 마지막 노드 값 대입
-          heap.remove(heap.size()-1); // 마지막 노드 삭제
-          
-          int pos = 1; // 위치(초기에는 루트노드)
-          
-          while((pos*2) < heap.size()) { // 자식노드가 존재하지 여부
-            
-            int max = heap.get(pos*2); // 최댓값은 좌측 자식노드의 값
-            int maxPos = pos * 2; // 최댓값 위치는 좌측 자식노드 인덱스 값
-            
-            if(((pos*2+1) < heap.size()) && max < heap.get(pos*2+1)) { // 힙 사이즈가 우측 자식노드위치값보다 큰경우(맨 하단까지) && 최댓값이 우측 자식 노드의 값보다 작은경우 => swap해야하는경우
-              max = heap.get(pos*2+1); // 최댓값은 우측 자식노드 값
-              maxPos = pos * 2 + 1; // 최댓값 위치는 우측 자식노드 인덱스값
-            }
-            
-            if(heap.get(pos) > max) { // 루트노드가 최댓값일때 아무일도 안일어나게 함
-              break;
-            }
-            
-            int temp = heap.get(pos); // swap // 루트노드 값 저장
-            heap.set(pos, heap.get(maxPos)); //루트 노드에 최댓값 대입
-            heap.set(maxPos, temp); // 최댓값이 있는 노드에 루트노드 대입
-            pos = maxPos; // 최댓값이 있는 노드의 위치를 갱신
-          }
-          
-          return deletedItem; // 삭제할 루트노드 값 반환
-          
-          
-        }
-        
+      private ArrayList<Integer> heap; // heap 이름의 int 데이터를 담는 ArrayList 배열 선언
+      // 배열과 달리 생성후에 크기가 변한다.
+      
+      public MaximumHeap() { // 생성자
+        heap = new ArrayList<>();
+        heap.add(1000000); // 0 인덱스에 안쓸 값 저장
       }
-
       
-      public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+      public void print() { // heap 출력
+        for(int i=1; i<heap.size(); i++) {
+          System.out.print(heap.get(i)+" ");
+        }
+        System.out.println();
+      }
+      
+      public void insert(int val) { // 가장 마지막에 삽입
+        heap.add(val); // 마지막 위치에 노드 삽입
+        int p = heap.size() - 1; // 인덱스 값
         
-        int N = sc.nextInt();
-        
-        MaximumHeap maximumHeap = new MaximumHeap(); // 최대 힙 객체 생성
-        
-        for(int i=0; i<N; i++) {
-          int val = sc.nextInt();
+        while(p>1 && heap.get(p/2) < heap.get(p)) { // 루트노드가 아니고, 자식 노드가 더 크다면
+          System.out.println("swap"); //swap
+          int temp = heap.get(p/2);
+          heap.set(p/2, heap.get(p));
+          heap.set(p, temp);
           
-          if(val==0) { // 삭제
-            System.out.println(maximumHeap.delete());
-          }
-          else if(val==-1) { // 힙 출력
-            maximumHeap.print();
-          }
           
-          else { // 삽입
-            maximumHeap.insert(val);
-          }
+          p=p/2; //부모 노드로 위치 이동
         }
       }
+      
+      public int delete() { // 항상 루트노드 삭제
+        if(heap.size() - 1 < 1) { // 힙 안의 노드가 하나도 없을 때는 삭제 불가
+          return 0;
         }
+        int deletedItem = heap.get(1); // 삭제할 데이터 저장(루트노드)
+        
+        heap.set(1, heap.get(heap.size() -1 )); // set() : 임의의 원소 수정 => 루트노드의 값에 마지막 노드 값 대입
+        heap.remove(heap.size()-1); // 마지막 노드 삭제
+        
+        int pos = 1; // 위치(초기에는 루트노드)
+        
+        while((pos*2) < heap.size()) { // 자식노드가 존재하지 여부
+                  
+          int maxPos = pos * 2; // 최댓값 위치는 좌측 자식노드 인덱스 값
+          
+          if(((maxPos+1) < heap.size()) && heap.get(maxPos) < heap.get(maxPos+1)) { // 힙 사이즈가 우측 자식노드위치값보다 큰경우(맨 하단까지) && 최댓값이 우측 자식 노드의 값보다 작은경우 => swap해야하는경우
+            maxPos++;
+          }
+          
+          if(heap.get(pos) > heap.get(maxPos)) { // 루트노드가 최댓값일때 아무일도 안일어나게 함
+            break;
+          }
+          
+          int temp = heap.get(pos); // swap // 루트노드 값 저장
+          heap.set(pos, heap.get(maxPos)); //루트 노드에 최댓값 대입
+          heap.set(maxPos, temp); // 최댓값이 있는 노드에 루트노드 대입
+          pos = maxPos; // 최댓값이 있는 노드의 위치를 갱신
+        }
+        
+        return deletedItem; // 삭제할 루트노드 값 반환
+        
+        
+      }
+      
+    }
 
+    
+    public static void main(String[] args) {
+      Scanner sc = new Scanner(System.in);
+      
+      int N = sc.nextInt();
+      
+      MaximumHeap maximumHeap = new MaximumHeap(); // 최대 힙 객체 생성
+      
+      for(int i=0; i<N; i++) {
+        int val = sc.nextInt();
+        
+        if(val==0) { // 삭제
+          System.out.println(maximumHeap.delete());
+        }
+        else if(val==-1) { // 힙 출력
+          maximumHeap.print();
+        }
+        
+        else { // 삽입
+          maximumHeap.insert(val);
+        }
+      }
+    }
+      }
+		
 
-ㄹ
 
    
 
