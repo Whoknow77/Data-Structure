@@ -297,7 +297,70 @@ print('프로그램 종료')
 
 ```
 
-- 라이브러리 사용법
+- **우선순위 큐**
+
+  - 정의
+
+
+    먼저 들어오는 데이터가 아니라, 우선순위가 높은 데이터가 먼저 나가는 형태의 자료구조이다.
+
+    일반적으로 **힙(완전이진트리)**을 이용하여 구현한다.
+  
+  - 연산
+
+    - insert(x) : 요소 x 추가되면
+    - remove() : 가장 우선순위가 높은 요소를 삭제하고 반환
+    - find() : 가장 우선순위가 높은 요소를 반환
+
+  - 구현
+
+    힙은 일반적으로 배열을 이용하여 구현
+
+    완전 이진트리이므로 중간에 비어있는 요소가 없기 때문
+
+    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FtrcoJ%2FbtqR9mecYaz%2FrrzQSqsZDoGZ5mhfqHzf61%2Fimg.png">
+
+  - 선언
+
+    ```
+    import java.util.PriorityQueue; //import
+
+    //int형 priorityQueue 선언 (우선순위가 낮은 숫자 순)
+    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+
+    //int형 priorityQueue 선언 (우선순위가 높은 숫자 순)
+    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+
+    //String형 priorityQueue 선언 (우선순위가 낮은 숫자 순)
+    PriorityQueue<String> priorityQueue = new PriorityQueue<>(); 
+
+    //String형 priorityQueue 선언 (우선순위가 높은 숫자 순)
+    PriorityQueue<String> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+    ```
+  - 추가
+
+    add(value) or offer(value) : 마지막 노드 뒤에 추가되고 부모로 가면서 조건에 맞게 스왑
+
+  - 삭제
+
+    ```
+      priorityQueue.poll();       // priorityQueue에 첫번째 값을 반환하고 제거 비어있다면 null
+      priorityQueue.remove();     // priorityQueue에 첫번째 값 제거
+      priorityQueue.clear();      // priorityQueue에 초기화
+    ```
+
+  - 우선순위가 가장 높은 값 출력
+
+    ```
+    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();//int형 priorityQueue 선언
+    priorityQueue.offer(2);     // priorityQueue에 값 2 추가
+    priorityQueue.offer(1);     // priorityQueue에 값 1 추가
+    priorityQueue.offer(3);     // priorityQueue에 값 3 추가
+    priorityQueue.peek();       // priorityQueue에 첫번째 값 참조 = 1
+    ```
+  
+
+
 
 
 
@@ -307,9 +370,9 @@ deque는 스택과 큐를 합친 자료구조이다.
 가장자리에 원소를 넣거나 뺄 수 있고 많이 사용 된다.
 
 
-- 스택과 큐를 list로 이용하지 않는 이유  
+- **스택과 큐를 list로 이용하지 않는 이유**  
 
-*스택에서 list.append와 list.pop()을 이용했던 것처럼 list.append와 list.pop(0)을 이용하면 리스트를 큐처럼 사용할 수 있다. 하지만 pop()의 time complexity는 O(1)인 반면 pop(0)의 time complexity는 O(N)이기 때문에 시간이 오래 걸린다. 따라서 시간 복잡도를 고려해 리스트는 큐로 사용하지 않는다.*  
+    스택에서 list.append와 list.pop()을 이용했던 것처럼 list.append와 list.pop(0)을 이용하면 리스트를 큐처럼 사용할 수 있다. 하지만 pop()의 time complexity는 O(1)인 반면 pop(0)의 time complexity는 O(N)이기 때문에 시간이 오래 걸린다. 따라서 시간 복잡도를 고려해 리스트는 큐로 사용하지 않는다. 
 
 - 연산
     + deque(iterable, [maxlen]) : 초기화 함수, 리스트(iterable)을 인자로 건내면 이를 deque화 시켜줌
@@ -1450,7 +1513,150 @@ public class BinaryTree {
 
       <img src="https://blog.kakaocdn.net/dn/s1RiO/btq6BfkAvAG/n6XsVdYaPzqWBfSUk2ujk1/img.png">
 
+
+
+## Vector(벡터)
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcflYak%2FbtqEn8fQTaA%2FrlKOblsKFkbgeGZfx729L0%2Fimg.png">
+
+  - 정의
+      
+      ArrayList와 동일한 내부구조를 가지고 있다.
+
+      내부에 값이 추가되면 자동으로 크기가 조절되며 그다음 객체들은 한 자리씩 이동된다.
+
+      유일한 차이점은 Vector는 **동기화된 메소드**로 되어 있다는 점으로 멀티 스레드가 동시에 이 메소드들을 실행할 수 없고, 하나의 스레드가 실행을 완료해야만 다른 스레드들이 실행할 수 있다.
+
+      그래서 멀디 스레드 환경에서 안전하게 객체를 추가하고 삭제할 수 있다.
+  - 단점
+
+    스레드가 1개일때도 동기화를 하기 때문에 ArrayList 보다 성능이 떨어지고, ArrayList가 속도가 더 빠르므로 ArrayList를 더 많이 쓴다.
+
+  - 선언
+
+    ```
+    Vector v = new Vector();//타입 미설정 Object로 선언된다.
+
+    Vector<Student> student = new Vector<Student>(); //타입설정 Student객체만 사용가능
+
+    Vector<Integer> num2 = new Vector<Integer>(); //타입설정 int타입만 사용가능
+
+    Vector<Integer> num3 = new Vector<>(); //new에서 타입 파라미터 생략가능
+
+    Vector<String> v2 = new Vector<String>(10);//초기 용량(capacity)지정
+
+    Vector<Integer> v3 = new Vector<Integer>(Arrays.asList(1,2,3)); //초기값 지정
+    ```
+
+    Vector선언시 타입을 지정하지 않고 임의의 타입의 값을 넣고 사용할 수도 있지만 이렇게 사용할 경우 벡터 내부의 값을 사용하려면 캐스팅(Casting) 연산이 필요하며 잘못된 타입으로 캐스팅을 한 경우에는 에러가 발생하기에 **Vector를 사용할때에는 타입을 명시**해주는 것이 좋다.
+
+  - 기능
+
+    - 추가
+      
+      ```
+      Vector<Integer> v = new Vector<Integer>();
+      v.add(3); //값 추가
+      v.add(null); //null값도 add가능
+      v.add(1,10); //index 1뒤에 10 삽입
+      ```
+
+    - 삭제
+
+      ```
+      Vector<Integer> v = new Vector<Integer>(Arrays.asList(1,2,3));
+      v.remove(1);  //index 1 제거
+      v.removeAllElements(); //모든 값 제거
+      v.clear();  //모든 값 제거
+      ```
+
+    - 크기
+
+      ```
+      Vector<Integer> v = new Vector<Integer>(10);//초기용량 10
+      v.add(1); //값 추가
+      System.out.println(v.size()); //Vector 자료 개수 : 1
+      System.out.println(v.capacity()); //Vector 물리적크기 : 10
+      ```
+
+    - 접근
+
+      백터객체명.get(인덱스)를 이용한다.
+        
     
+
+## Union-Find(합집합 찾기) - 크루스칼 선행 알고리즘
+
+  그래프 알고리즘에 속하며
+  서로소 집합 알고리즘이라고도 한다.
+
+  - Union(합침)
+
+    값이 작은 쪽으로 부모를 바꿈.
+
+  - Find(탐색)
+
+    같은 부모를 가지고 있는지, 즉 같은 그룹에 속해있는지 알려주는 함수
+    
+    **재귀를 사용함.**
+
+    ```
+    package Kruskal;
+
+    public class Kruskal {
+
+      public static int getParent(int Parent[], int x) { // 재귀적으로 부모 노드를 찾음
+        if (Parent[x] == x) {
+          return x; // 자기 자신이 부모인경우
+        }
+        return Parent[x] = getParent(Parent, Parent[x]); // 자기 자신이 부모가 아닌 경우 재귀적 호출
+      }
+
+      public static void unionParent(int parent[], int a, int b) { // 두 부모 노드를 합침
+        a = getParent(parent, a);
+        b = getParent(parent, b);
+        if (a < b) { // 작은 쪽의 부모로 합치기
+          parent[b] = a;
+
+        } else {
+          parent[a] = b;
+        }
+      }
+
+      public static int findParent(int parent[], int a, int b) { // 같은 부모를 가지는지 확인
+        a = getParent(parent, a);
+        b = getParent(parent, b);
+        if (a == b) {
+          return 1; // 같은 부모
+        }
+        return 0; // 다른 부모
+      }
+
+      public static void main(String[] args) {
+        int[] parent = new int[11];
+        for (int i = 1; i <= 10; i++) { // 부모를 자기 자신의 갚으로 초기화
+          parent[i] = i;
+        }
+
+        unionParent(parent, 1, 2);
+        unionParent(parent, 2, 3);
+        unionParent(parent, 3, 4);
+        unionParent(parent, 5, 6);
+        unionParent(parent, 6, 7);
+        unionParent(parent, 7, 8);
+        System.out.print("1과 5는 연결되어 있나요 " + findParent(parent, 1, 5));
+      }
+        }
+        
+
+  
+
+
+
+
+
+
+
+
 ## 최소 신장 트리(MST)를 찾는 알고리즘
 
 **Greedy 알고리즘** 을 이용한다.
@@ -1460,10 +1666,76 @@ public class BinaryTree {
     1) 주어진 그래프의 모든 간선에 대해서, 간선의 연결비용을 낮은 순으로 오름 차순 정렬한다.
 
     2) 정렬된 간선 순서대로 선택하면서, 간선의 양 끝 정점을 Union 한다. 단, 이때 선택된 두 정점이 같은 집합에 속해있다면 사이클(cycle)이 있다고 판단하고 포함시키지 않는다.
+   
+        같은 집합에 있는 두 정점을 이어버리면 사이클이 형성되므로 최소신장트리에 위배된다.
 
-    3) 
+    ```
+    package Kruskal;
 
-  - **Prim 알고리즘**
+    import java.util.Arrays;
+    import java.util.Scanner;
+
+    public class Kruskal {
+
+      static int V, E; // 정점의 개수, 간선의 개수
+      static int[][] graph;
+      static int[] parent; // 각 노드의 부모
+      static int final_cost; // 최종적으로 연결된 최소 신장 트리 연결 비용
+
+      public static int find(int x) { // 재귀적으로 부모 노드를 찾음
+        if (parent[x] == x) {
+          return x; // 자기 자신이 부모인경우
+        }
+        return find(parent[x]); // 자기 자신이 부모가 아닌 경우 재귀적 호출
+      }
+
+      public static void union(int a, int b) { // 두 부모 노드를 합침
+        a = find(a);
+        b = find(b);
+        if (a < b) { // 작은 쪽의 부모로 합치기
+          parent[b] = a;
+
+        } else {
+          parent[a] = b;
+        }
+      }
+
+      public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        V = sc.nextInt();
+        E = sc.nextInt();
+        graph = new int[E][3];
+        for (int i = 0; i < E; i++) { // 각각 그래프의 출발정점, 이을정점, 비용 저장(0,1,2)
+          graph[i][0] = sc.nextInt();
+          graph[i][1] = sc.nextInt();
+          graph[i][2] = sc.nextInt();
+        }
+        parent = new int[V + 1]; // 정점 개수만큼 부모노드 담을 배열개수 정의
+        final_cost = 0;
+
+        Arrays.sort(graph, (o1, o2) -> Integer.compare(o1[2], o2[2])); // 낮은 비용 오름차순 정렬
+
+        for (int i = 1; i <= V; i++) {
+          parent[i] = i; // 각 노드의 부모는 자신의 노드로 초기화
+        }
+
+        for (int i = 0; i < E; i++) {
+          if (find(graph[i][0]) != find(graph[i][1])) { // 부모가 다를때
+            System.out.println("<선택된 간선>");
+            System.out.println(Arrays.toString(graph[i])); // 정점, 이을정점, 비용 출력
+            union(graph[i][0], graph[i][1]);
+            final_cost += graph[i][2]; // 비용 누적
+            System.out.println("<각 노드가 가리키고 있는 부모>");
+            System.out.println(Arrays.toString(parent) + "\n");
+          }
+        }
+
+        System.out.println("최종 비용 : " + final_cost);
+        sc.close();
+      }
+        }
+  https://sskl660.tistory.com/72
+- **Prim 알고리즘**
 
     1) 
 
@@ -1513,3 +1785,5 @@ public class BinaryTree {
     https://opentutorials.org/module/1335/8941#
     https://go-coding.tistory.com/7
     https://hongcoding.tistory.com/78
+    https://coding-factory.tistory.com/553
+    https://suyeon96.tistory.com/31
