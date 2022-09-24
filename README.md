@@ -1,6 +1,7 @@
 # 자료구조(Python,JAVA)
-
-## Stack
+<details>
+<summary>Stack(스택)</summary>
+<div markdown="1">
 
 - 정의   
   LIFO(Last in First Out)구조를 따르고 선입선출인 큐와 반대되는 개념이다.   
@@ -126,8 +127,13 @@ for expr in exprAry:
 
 하지만 실제로는 그냥 리스트를 쓰면 된다. 리스트구조랑 스택 구조가 같다.(파이썬에서는 스택 라이브러리 따로 제공 X)
 
+</div>
+</details>
 
-## Queue
+
+<details>
+<summary>Queue(큐)</summary>
+<div markdown="1">
 
 - 정의   
   FIFO(First in First Out)구조를 따르고 후입선출인 스택과 반대되는 개념이다.   
@@ -358,13 +364,15 @@ print('프로그램 종료')
     priorityQueue.offer(3);     // priorityQueue에 값 3 추가
     priorityQueue.peek();       // priorityQueue에 첫번째 값 참조 = 1
     ```
-  
+  </div>
+  </details>
 
 
 
 
-
-## deQue(덱)
+<details>
+<summary>Deque(덱)</summary>
+<div markdown="1">
 
 deque는 스택과 큐를 합친 자료구조이다.  
 가장자리에 원소를 넣거나 뺄 수 있고 많이 사용 된다.
@@ -390,8 +398,12 @@ deque는 스택과 큐를 합친 자료구조이다.
     d=deque()
     d2=duque([1,2,3]) 등으로 설정
     ```
+  </div>
+  </details>
 
-## ArrayList(배열)
+<details>
+<summary>ArrayList(배열)</summary>
+<div markdown="1">
 - 정의  
   추가/삭제가 느리지만 인덱스로 접근하므로 탐색에 용이하다.
 
@@ -528,11 +540,12 @@ public class ArrayList {
  
 }
 ```
+</div>
+</details>
 
-
-
-
-## LinkedList(단일 연결 리스트)
+<details>
+<summary>LinkedList(단일 연결 리스트)</summary>
+<div markdown="1">
 - 정의  
   각 노드가 데이터와 포인터를 가지고 한 줄로 연결되어 있는 방식의 자료구조, 노드의 포인터가 다음 노드와의 연결을 담당한다.
 
@@ -743,9 +756,12 @@ public class LinkedList {
  
 }
 ```
+</div>
+</details>
 
-
-## DoublyLinkedList(이중 연결 리스트)
+<details>
+<summary>Doubly Linked List(이중 연결 리스트)</summary>
+<div markdown="1">
   - 정의  
     노드의 포인터가 이전 노드와의 연결을 담당하는 것을 추가함.  
     따라서 더 간편하지만, 데이터양이 늘어남.  
@@ -1046,8 +1062,13 @@ public class DoublyLinkedList {
     }
 }
 ```
+</div>
+</details>
 
-## 트리(Tree)
+
+<details>
+<summary>Tree(트리)</summary>
+<div markdown="1">
 
 -  정의
 
@@ -1209,9 +1230,12 @@ public class BinaryTree {
 	}
     }
 ```
+</div>
+</details>
 
-
-## 힙(Heap)
+<details>
+<summary>Heap(힙)</summary>
+<div markdown="1">
 
   - 정의
     
@@ -1368,9 +1392,12 @@ public class BinaryTree {
       }
     }
       }
+</div>
+</details>
 
-
-## 그래프(Graph)
+<details>
+<summary>Graph(그래프)</summary>
+<div markdown="1">
 
   **정점(Vertex)와 간선(Edge)으로 이루어진 자료구조**
 
@@ -1512,10 +1539,12 @@ public class BinaryTree {
       신장트리 중 간선의 가중치 합이 최소인 신장 트리
 
       <img src="https://blog.kakaocdn.net/dn/s1RiO/btq6BfkAvAG/n6XsVdYaPzqWBfSUk2ujk1/img.png">
+</div>
+</details>
 
-
-
-## Vector(벡터)
+<details>
+<summary>Vector(벡터)</summary>
+<div markdown="1">
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcflYak%2FbtqEn8fQTaA%2FrlKOblsKFkbgeGZfx729L0%2Fimg.png">
 
   - 정의
@@ -1581,10 +1610,13 @@ public class BinaryTree {
     - 접근
 
       백터객체명.get(인덱스)를 이용한다.
-        
+</div>
+</details>     
     
-
-## Union-Find(합집합 찾기) - 크루스칼 선행 알고리즘
+<details>
+<summary>Union-Find(합집합 찾기)</summary>
+<div markdown="1">
+**크루스칼 선행 알고리즘**
 
   그래프 알고리즘에 속하며
   서로소 집합 알고리즘이라고도 한다.
@@ -1646,19 +1678,12 @@ public class BinaryTree {
         System.out.print("1과 5는 연결되어 있나요 " + findParent(parent, 1, 5));
       }
         }
-        
+  </div>
+  </details>     
 
-  
-
-
-
-
-
-
-
-
-## 최소 신장 트리(MST)를 찾는 알고리즘
-
+<details>
+<summary>MST(최소신장트리)</summary>
+<div markdown="1">
 **Greedy 알고리즘** 을 이용한다.
 
   - **크루스칼 알고리즘**
@@ -1776,8 +1801,11 @@ public class BinaryTree {
 
 
 
+</div>
+</details>
 
------------------------------------
+
+-------------------------------------------------------------------------
 # 출처 
 
     https://yjshin.tistory.com/entry/
